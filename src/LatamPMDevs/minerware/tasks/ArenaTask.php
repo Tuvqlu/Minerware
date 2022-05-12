@@ -16,7 +16,7 @@
  * (at your option) any later version.
  *
  * Copyright 2022 © LatamPMDevs
- * 
+ *
 
 declare(strict_types=1);
 
