@@ -566,7 +566,7 @@ final class Arena implements Listener {
 		$player = $event->getEntity();
 		if (!$player instanceof Player) return;
 		if ($event->getTo()->getWorld() === $this->world) return;
-		if ($event->getFrom()->getWorld() === $event->getTo()->getWorld()) return;
+		if ($event->getFrom()->world === $event->getTo()->getWorld()) return;
 		if ($this->inGame($player)) {
 			$this->quit($player);
 		}
@@ -595,6 +595,11 @@ final class Arena implements Listener {
 				$player->teleport($this->getRandomSpawn());
 			}
 			$event->cancel();
+		} else {
+			if ($this->currentMicrogame->isLoser($player) ||
+				$this->currentMicrogame->isWinner($player)) {
+				$event->cancel(); //Winners and losers cannot be damaged
+			}
 		}
 	}
 }
